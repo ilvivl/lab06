@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
+[![Build Status](https://travis-ci.org/ilvivl/lab06.svg?branch=master)](https://travis-ci.com/ilvivl/lab06)
 ## Laboratory work V
 
-<a href="https://yandex.ru/efir/?stream_id=vQw_LH0UfN6I"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
+<a href="https://yandex.ru/efir/?stream_id=vQw_LH0UfN6I"><img src="https://raw.githubusercontent.com/tp-labs/lab06/master/preview.png" width="640"/></a>
 
 Данная лабораторная работа посвещена изучению фреймворков для тестирования на примере **GTest**
 
@@ -11,7 +11,7 @@ $ open https://github.com/google/googletest
 
 ## Tasks
 
-- [x] 1. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
+- [x] 1. Создать публичный репозиторий с названием **lab06** на сервисе **GitHub**
 - [x] 2. Выполнить инструкцию учебного материала
 - [x] 3. Ознакомиться со ссылками учебного материала
 - [x] 4. Составить отчет и отправить ссылку личным сообщением в **Slack**
@@ -31,23 +31,23 @@ $ source scripts/activate
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab05
-Cloning into 'projects/lab05'...
+$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab06
+Cloning into 'projects/lab06'...
 remote: Enumerating objects: 101, done.
 remote: Counting objects: 100% (101/101), done.
 remote: Compressing objects: 100% (52/52), done.
 remote: Total 101 (delta 44), reused 101 (delta 44), pack-reused 0
 Receiving objects: 100% (101/101), 1.02 MiB | 1.60 MiB/s, done.
 Resolving deltas: 100% (44/44), done.
-$ cd projects/lab05
+$ cd projects/lab06
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab06
 ```
 
 ```sh
 $ mkdir third-party
 $ git submodule add https://github.com/google/googletest third-party/gtest #add a test framework as a submodule of the repository
-Cloning into '/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/third-party/gtest'...
+Cloning into '/home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/third-party/gtest'...
 remote: Enumerating objects: 20, done.
 remote: Counting objects: 100% (20/20), done.
 remote: Compressing objects: 100% (15/15), done.
@@ -108,7 +108,7 @@ EOF
 
 ```sh
 $ cmake -H. -B_build -DBUILD_TESTS=ON #building
--- Build files have been written to: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+-- Build files have been written to: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build
 $ cmake --build _build # build subdirectory
 [ 83%] Built target gmock
 Scanning dependencies of target gmock_main
@@ -117,7 +117,7 @@ Scanning dependencies of target gmock_main
 [100%] Built target gmock_main
 $ cmake --build _build --target test #test checking
 Running tests...
-Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build
     Start 1: check
 1/1 Test #1: check ............................   Passed    0.02 sec
 
@@ -140,9 +140,9 @@ $ _build/check # run tests entirely
 [  PASSED  ] 1 test.
 $ cmake --build _build --target test -- ARGS=--verbose #detail building
 Running tests...
-UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/DartConfiguration.tcl
-UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/DartConfiguration.tcl
-Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build/DartConfiguration.tcl
+Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build
 Constructing a list of tests
 Done constructing a list of tests
 Updating test list for fixtures
@@ -152,9 +152,9 @@ Checking test dependency graph end
 test 1
     Start 1: check
 
-1: Test command: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/check
+1: Test command: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/_build/check
 1: Test timeout computed to be: 10000000
-1: Running main() from /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+1: Running main() from /home/ilya/Documents/acro/ilvivl/workspace/projects/lab06/third-party/gtest/googletest/src/gtest_main.cc
 1: [==========] Running 1 test from 1 test case.
 1: [----------] Global test environment set-up.
 1: [----------] 1 test from Print
@@ -174,7 +174,7 @@ Total Test time (real) =   0.00 sec
 ```
 
 ```sh
-$ gsed -i 's/lab04/lab05/g' README.md #edit files in place (makes backup if SUFFIX supplied)
+$ gsed -i 's/lab04/lab06/g' README.md #edit files in place (makes backup if SUFFIX supplied)
 $ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml #add code for test building in travis.yml
 $ gsed -i '/cmake --build _build --target install/a\ #add code for test launching
 - cmake --build _build --target test -- ARGS=--verbose
@@ -223,7 +223,7 @@ index 095c4d4..a25491a 100644
 +++ b/README.md
 @@ -1,4 +1,4 @@
 -[![Build Status](https://travis-ci.com/ilvivl/lab04.svg?branch=master)](https://travis-ci.com/ilvivl/lab04)
-+[![Build Status](https://travis-ci.com/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
++[![Build Status](https://travis-ci.com/ilvivl/lab06.svg?branch=master)](https://travis-ci.com/ilvivl/lab06)
  ## Laboratory work III
  
  <a href="https://yandex.ru/efir/?stream_id=vjKAlxJ0UQrs"><img src="https://raw.githubusercontent.com/tp-labs/lab03/master/preview.png" width="640"/></a>
@@ -242,7 +242,7 @@ Compressing objects: 100% (65/65), done.
 Writing objects: 100% (116/116), 1.02 MiB | 41.89 MiB/s, done.
 Total 116 (delta 49), reused 98 (delta 44)
 remote: Resolving deltas: 100% (49/49), done.
-To https://github.com/ilvivl/lab05
+To https://github.com/ilvivl/lab06
  * [new branch]      master -> master
 ```
 
@@ -250,15 +250,15 @@ To https://github.com/ilvivl/lab05
 $ travis login --auto
 Successfully logged in as ilvivl!
 $ travis enable #enable repo
-Detected repository as ilvivl/lab05, is this correct? |yes| yes
-ilvivl/lab05: enabled :)
+Detected repository as ilvivl/lab06, is this correct? |yes| yes
+ilvivl/lab06: enabled :)
 ```
 
 ```sh
 $ mkdir artifacts
 $ sleep 20s && gnome-screenshot --file artifacts/screenshot.png #make an save a screenshot
 # for macOS: $ screencapture -T 20 artifacts/screenshot.png
-# open https://github.com/${GITHUB_USERNAME}/lab05
+# open https://github.com/${GITHUB_USERNAME}/lab06
 ```
 
 ## Report
