@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.com/ilvivl/lab04.svg?branch=master)](https://travis-ci.com/ilvivl/lab04)
+[![Build Status](https://travis-ci.com/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
 ## Laboratory work IV
 
-<a href="https://yandex.ru/efir/?stream_id=vCgeA9EiySzw"><img src="https://raw.githubusercontent.com/tp-labs/lab04/master/preview.png" width="640"/></a>
+<a href="https://yandex.ru/efir/?stream_id=vCgeA9EiySzw"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
 
 Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **Travis CI**
 
@@ -12,7 +12,7 @@ $ open https://travis-ci.org
 ## Tasks
 
 - [x] 1. Авторизоваться на сервисе **Travis CI** с использованием **GitHub** аккаунта
-- [x] 2. Создать публичный репозиторий с названием **lab04** на сервисе **GitHub**
+- [x] 2. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
 - [x] 3. Ознакомиться со ссылками учебного материала
 - [x] 4. Включить интеграцию сервиса **Travis CI** с созданным репозиторием
 - [x] 5. Получить токен для **Travis CLI** с правами **repo** и **user**
@@ -58,16 +58,16 @@ Done installing documentation for multipart-post, faraday, faraday_middleware, h
 ```
 
 ```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab04
-Cloning into 'projects/lab04'...
+$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab05
+Cloning into 'projects/lab05'...
 remote: Enumerating objects: 15, done.
 remote: Counting objects: 100% (15/15), done.
 remote: Compressing objects: 100% (13/13), done.
 remote: Total 88 (delta 7), reused 4 (delta 2), pack-reused 73
 Unpacking objects: 100% (88/88), done.
-$ cd projects/lab04
+$ cd projects/lab05
 $ git remote remove origin #remove remote origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04 #add remote origin
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05 #add remote origin
 ```
 
 ```sh
@@ -130,7 +130,7 @@ Compressing objects: 100% (89/89), done.
 Writing objects: 100% (92/92), 1.02 MiB | 14.31 MiB/s, done.
 Total 92 (delta 43), reused 0 (delta 0)
 remote: Resolving deltas: 100% (43/43), done.
-To https://github.com/ilvivl/lab04
+To https://github.com/ilvivl/lab05
  * [new branch]      master -> master
 ```
 
@@ -146,14 +146,14 @@ $ travis repos #watch repos
 ilvivl/lab03 (active: no, admin: yes, push: yes, pull: yes)
 Description: ???
 
-ilvivl/lab04 (active: yes, admin: yes, push: yes, pull: yes)
+ilvivl/lab05 (active: yes, admin: yes, push: yes, pull: yes)
 Description: ???
 ...
 $ travis enable # watch, what are enable and do
-Detected repository as ilvivl/lab04, is this correct? |yes| yes
-ilvivl/lab04: enabled :)
+Detected repository as ilvivl/lab05, is this correct? |yes| yes
+ilvivl/lab05: enabled :)
 $ travis whatsup #projects statu#show building historys 
-ilvivl/lab04 passed: #2
+ilvivl/lab05 passed: #2
 $ travis branches #branch infromation
 master:  #2    passed     fix
 $ travis history #building history
@@ -164,7 +164,7 @@ Job #2.1:  fix
 State:         passed
 Type:          push
 Branch:        master
-Compare URL:   https://github.com/ilvivl/lab04/compare/bb33f2f924fe...e7924eb223eb
+Compare URL:   https://github.com/ilvivl/lab05/compare/bb33f2f924fe...e7924eb223eb
 Duration:      35 sec
 Started:       2020-05-18 00:10:26
 Finished:      2020-05-18 00:11:01
@@ -179,7 +179,7 @@ $ popd
 ~/Documents/acro/ilvivl/workspace
 $ export LAB_NUMBER=04
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
-Cloning into 'tasks/lab04'...
+Cloning into 'tasks/lab05'...
 remote: Enumerating objects: 15, done.
 remote: Counting objects: 100% (15/15), done.
 remote: Compressing objects: 100% (14/14), done.
