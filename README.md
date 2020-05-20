@@ -1,190 +1,272 @@
-[![Build Status](https://travis-ci.com/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
-## Laboratory work IV
+[![Build Status](https://travis-ci.org/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
+## Laboratory work V
 
-<a href="https://yandex.ru/efir/?stream_id=vCgeA9EiySzw"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
+<a href="https://yandex.ru/efir/?stream_id=vQw_LH0UfN6I"><img src="https://raw.githubusercontent.com/tp-labs/lab05/master/preview.png" width="640"/></a>
 
-Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **Travis CI**
+Данная лабораторная работа посвещена изучению фреймворков для тестирования на примере **GTest**
 
 ```sh
-$ open https://travis-ci.org
+$ open https://github.com/google/googletest
 ```
 
 ## Tasks
 
-- [x] 1. Авторизоваться на сервисе **Travis CI** с использованием **GitHub** аккаунта
-- [x] 2. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
+- [x] 1. Создать публичный репозиторий с названием **lab05** на сервисе **GitHub**
+- [x] 2. Выполнить инструкцию учебного материала
 - [x] 3. Ознакомиться со ссылками учебного материала
-- [x] 4. Включить интеграцию сервиса **Travis CI** с созданным репозиторием
-- [x] 5. Получить токен для **Travis CLI** с правами **repo** и **user**
-- [x] 6. Получить фрагмент вставки значка сервиса **Travis CI** в формате **Markdown**
-- [x] 7. Выполнить инструкцию учебного материала
-- [x] 8. Составить отчет и отправить ссылку личным сообщением в **Slack**
+- [x] 4. Составить отчет и отправить ссылку личным сообщением в **Slack**
 
 ## Tutorial
 
 ```sh
 $ export GITHUB_USERNAME=ilvivl #define value GITHUB_USERNAME
-$ export GITHUB_TOKEN=********** #define value GITHUB_TOKEN
+$ alias gsed=sed # for *-nix system
 ```
 
 ```sh
 $ cd ${GITHUB_USERNAME}/workspace
-$ pushd . #save the current working directory in memory
+$ pushd .
 ~/Documents/acro/ilvivl/workspace ~/Documents/acro/ilvivl/workspace
-$ source scripts/activate #read and execute file activate
+$ source scripts/activate
 ```
 
 ```sh
-$ \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles #curl  is  a tool to transfer data from or to a server, update packages
-Installation of RVM in /home/ilya/.rvm/ is almost complete:
-
-  * To start using RVM you need to run `source /home/ilya/.rvm/scripts/rvm`
-    in all your open shell windows, in rare cases you need to reopen all shell windows.
-Thanks for installing RVM 🙏
-$ echo "source $HOME/.rvm/scripts/rvm" >> scripts/activate
-$ . scripts/activate
-$ rvm autolibs disable # rvm - The Ruby Version Manager, disable automatic dependency installation
-$ rvm install ruby-2.4.2
-Searching for binary rubies, this might take some time.
-Found remote file https://rvm_io.global.ssl.fastly.net/binaries/ubuntu/19.10/x86_64/ruby-2.4.2.tar.bz2
-ruby-2.4.2 - #configure
-ruby-2.4.2 - #download
-$ rvm use 2.4.2 --default #set default ruby language manager
-Using /home/ilya/.rvm/gems/ruby-2.4.2
-$ gem install travis
-Done installing documentation for multipart-post, faraday, faraday_middleware, highline, concurrent-ruby, i18n, thread_safe, tzinfo, activesupport, multi_json, public_suffix, addressable, net-http-persistent, net-http-pipeline, gh, launchy, ffi, ethon, typhoeus, websocket, pusher-client, travis after 15 seconds
-22 gems installed
-
-```
-
-```sh
-$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab05
+$ git clone https://github.com/${GITHUB_USERNAME}/lab04 projects/lab05
 Cloning into 'projects/lab05'...
-remote: Enumerating objects: 15, done.
-remote: Counting objects: 100% (15/15), done.
-remote: Compressing objects: 100% (13/13), done.
-remote: Total 88 (delta 7), reused 4 (delta 2), pack-reused 73
-Unpacking objects: 100% (88/88), done.
+remote: Enumerating objects: 101, done.
+remote: Counting objects: 100% (101/101), done.
+remote: Compressing objects: 100% (52/52), done.
+remote: Total 101 (delta 44), reused 101 (delta 44), pack-reused 0
+Receiving objects: 100% (101/101), 1.02 MiB | 1.60 MiB/s, done.
+Resolving deltas: 100% (44/44), done.
 $ cd projects/lab05
-$ git remote remove origin #remove remote origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05 #add remote origin
+$ git remote remove origin
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
 ```
 
 ```sh
-$ cat > .travis.yml <<EOF #install instruments for the cpp compilation
-language: cpp
+$ mkdir third-party
+$ git submodule add https://github.com/google/googletest third-party/gtest #add a test framework as a submodule of the repository
+Cloning into '/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/third-party/gtest'...
+remote: Enumerating objects: 20, done.
+remote: Counting objects: 100% (20/20), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 20303 (delta 3), reused 10 (delta 3), pack-reused 20283
+Receiving objects: 100% (20303/20303), 7.54 MiB | 1.96 MiB/s, done.
+Resolving deltas: 100% (15006/15006), done.
+$ cd third-party/gtest && git checkout release-1.8.1 && cd ../.. #stay on stable version 1.8.1
+HEAD is now at 2fe3bd99 Merge pull request #1433 from dsacre/fix-clang-warnings
+$ git add third-party/gtest
+$ git commit -m"added gtest framework"
+[master da9671a] added gtest framework
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 third-party/gtest
+```
+
+```sh
+$ gsed -i '/option(BUILD_EXAMPLES "Build examples" OFF)/a\ #sed - stream editor for filtering and transforming text,  insert after the line "option(BUILD_EXAMPLES "Build examples" OFF)" line "option(BUILD_TESTS "Build tests" OFF)" into CMakeLists
+option(BUILD_TESTS "Build tests" OFF)
+' CMakeLists.txt
+$ cat >> CMakeLists.txt <<EOF #add target of test
+
+if(BUILD_TESTS)
+  enable_testing()
+  add_subdirectory(third-party/gtest)
+  file(GLOB \${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
+  add_executable(check \${\${PROJECT_NAME}_TEST_SOURCES})
+  target_link_libraries(check \${PROJECT_NAME} gtest_main)
+  add_test(NAME check COMMAND check)
+endif()
 EOF
 ```
 
 ```sh
-$ cat >> .travis.yml <<EOF #in the build phase
+$ mkdir tests
+$ cat > tests/test1.cpp <<EOF #test
+#include <print.hpp>
 
-script:
-- cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
-- cmake --build _build
-- cmake --build _build --target install
+#include <gtest/gtest.h>
+
+TEST(Print, InFileStream)
+{
+  std::string filepath = "file.txt";
+  std::string text = "hello";
+  std::ofstream out{filepath};
+
+  print(text, out);
+  out.close();
+
+  std::string result;
+  std::ifstream in{filepath};
+  in >> result;
+
+  EXPECT_EQ(result, text);
+}
 EOF
 ```
 
 ```sh
-$ cat >> .travis.yml <<EOF #packages
+$ cmake -H. -B_build -DBUILD_TESTS=ON #building
+-- Build files have been written to: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+$ cmake --build _build # build subdirectory
+[ 83%] Built target gmock
+Scanning dependencies of target gmock_main
+[ 91%] Building CXX object third-party/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
+[100%] Linking CXX static library libgmock_main.a
+[100%] Built target gmock_main
+$ cmake --build _build --target test #test checking
+Running tests...
+Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+    Start 1: check
+1/1 Test #1: check ............................   Passed    0.02 sec
 
-addons:
-  apt:
-    sources:
-      - george-edison55-precise-backports
-    packages:
-      - cmake
-      - cmake-data
-EOF
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.03 sec
 ```
 
 ```sh
-$ travis login --github-token ${GITHUB_TOKEN} #work with Travis
-Successfully logged in as ilvivl!
+$ _build/check # run tests entirely
+[==========] Running 1 test from 1 test case.
+[----------] Global test environment set-up.
+[----------] 1 test from Print
+[ RUN      ] Print.InFileStream
+[       OK ] Print.InFileStream (1 ms)
+[----------] 1 test from Print (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test case ran. (1 ms total)
+[  PASSED  ] 1 test.
+$ cmake --build _build --target test -- ARGS=--verbose #detail building
+Running tests...
+UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/DartConfiguration.tcl
+Test project /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+    Start 1: check
+
+1: Test command: /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/_build/check
+1: Test timeout computed to be: 10000000
+1: Running main() from /home/ilya/Documents/acro/ilvivl/workspace/projects/lab05/third-party/gtest/googletest/src/gtest_main.cc
+1: [==========] Running 1 test from 1 test case.
+1: [----------] Global test environment set-up.
+1: [----------] 1 test from Print
+1: [ RUN      ] Print.InFileStream
+1: [       OK ] Print.InFileStream (0 ms)
+1: [----------] 1 test from Print (0 ms total)
+1: 
+1: [----------] Global test environment tear-down
+1: [==========] 1 test from 1 test case ran. (0 ms total)
+1: [  PASSED  ] 1 test.
+1/1 Test #1: check ............................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.00 sec
+
 ```
 
 ```sh
-$ travis lint #check the yml file for the validity
+$ gsed -i 's/lab04/lab05/g' README.md #edit files in place (makes backup if SUFFIX supplied)
+$ gsed -i 's/\(DCMAKE_INSTALL_PREFIX=_install\)/\1 -DBUILD_TESTS=ON/' .travis.yml #add code for test building in travis.yml
+$ gsed -i '/cmake --build _build --target install/a\ #add code for test launching
+- cmake --build _build --target test -- ARGS=--verbose
+' .travis.yml
+```
+
+```sh
+$ travis lint #check travis
 Hooray, .travis.yml looks valid :)
 ```
 
 ```sh
-$ ex -sc '1i|<фрагмент_вставки_значка>' -cx README.md
-```
-
-```sh
 $ git add .travis.yml
-$ git add README.md
-$ git commit -m"added CI"
-[master bb33f2f] added CI
- 2 files changed, 15 insertions(+)
- create mode 100644 .travis.yml
+$ git add tests
+$ git add -p #look, what didn'ty add
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 96a361e..89739e7 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ 
+ option(BUILD_EXAMPLES "Build examples" OFF)
++option(BUILD_TESTS "Build tests" OFF)
+ 
+ project(print)
+ 
+Stage this hunk [y,n,q,a,d,j,J,g,/,e,?]? y
+@@ -34,3 +35,11 @@ install(TARGETS print
+ 
+ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
+ install(EXPORT print-config DESTINATION cmake)
++if(BUILD_TESTS)
++  enable_testing()
++  add_subdirectory(third-party/gtest)
++  file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
++  add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
++  target_link_libraries(check ${PROJECT_NAME} gtest_main)
++  add_test(NAME check COMMAND check)
++endif()
+Stage this hunk [y,n,q,a,d,K,g,/,e,?]? y
+
+diff --git a/README.md b/README.md
+index 095c4d4..a25491a 100644
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,4 @@
+-[![Build Status](https://travis-ci.com/ilvivl/lab04.svg?branch=master)](https://travis-ci.com/ilvivl/lab04)
++[![Build Status](https://travis-ci.com/ilvivl/lab05.svg?branch=master)](https://travis-ci.com/ilvivl/lab05)
+ ## Laboratory work III
+ 
+ <a href="https://yandex.ru/efir/?stream_id=vjKAlxJ0UQrs"><img src="https://raw.githubusercontent.com/tp-labs/lab03/master/preview.png" width="640"/></a>
+Stage this hunk [y,n,q,a,d,e,?]? y
+$ git commit -m"added tests"
+[master 3745a37] added tests
+ 4 files changed, 31 insertions(+), 2 deletions(-)
+ create mode 100644 tests/test1.cpp
 $ git push origin master
 Username for 'https://github.com': ilvivl
 Password for 'https://ilvivl@github.com': 
-Enumerating objects: 92, done.
-Counting objects: 100% (92/92), done.
+Enumerating objects: 116, done.
+Counting objects: 100% (116/116), done.
 Delta compression using up to 4 threads
-Compressing objects: 100% (89/89), done.
-Writing objects: 100% (92/92), 1.02 MiB | 14.31 MiB/s, done.
-Total 92 (delta 43), reused 0 (delta 0)
-remote: Resolving deltas: 100% (43/43), done.
+Compressing objects: 100% (65/65), done.
+Writing objects: 100% (116/116), 1.02 MiB | 41.89 MiB/s, done.
+Total 116 (delta 49), reused 98 (delta 44)
+remote: Resolving deltas: 100% (49/49), done.
 To https://github.com/ilvivl/lab05
  * [new branch]      master -> master
 ```
 
 ```sh
-$ travis lint #check the yml file for the validity
-Hooray, .travis.yml looks valid :)
-$ travis accounts #Travis accounts
-ilvivl (Ilya_Vinogradov): subscribed, 11 repositories
-$ travis sync #synchronize Github repos and Travis
-synchronizing: . done
-$ travis repos #watch repos
-...
-ilvivl/lab03 (active: no, admin: yes, push: yes, pull: yes)
-Description: ???
-
-ilvivl/lab05 (active: yes, admin: yes, push: yes, pull: yes)
-Description: ???
-...
-$ travis enable # watch, what are enable and do
+$ travis login --auto
+Successfully logged in as ilvivl!
+$ travis enable #enable repo
 Detected repository as ilvivl/lab05, is this correct? |yes| yes
 ilvivl/lab05: enabled :)
-$ travis whatsup #projects statu#show building historys 
-ilvivl/lab05 passed: #2
-$ travis branches #branch infromation
-master:  #2    passed     fix
-$ travis history #building history
-#2 passed:       master fix
-#1 failed:       master added CI
-$ travis show #show last buildingpo
-Job #2.1:  fix
-State:         passed
-Type:          push
-Branch:        master
-Compare URL:   https://github.com/ilvivl/lab05/compare/bb33f2f924fe...e7924eb223eb
-Duration:      35 sec
-Started:       2020-05-18 00:10:26
-Finished:      2020-05-18 00:11:01
-Allow Failure: false
-Config:        os: linux
+```
+
+```sh
+$ mkdir artifacts
+$ sleep 20s && gnome-screenshot --file artifacts/screenshot.png #make an save a screenshot
+# for macOS: $ screencapture -T 20 artifacts/screenshot.png
+# open https://github.com/${GITHUB_USERNAME}/lab05
 ```
 
 ## Report
 
 ```sh
 $ popd
-~/Documents/acro/ilvivl/workspace
-$ export LAB_NUMBER=04
+$ export LAB_NUMBER=05
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER} tasks/lab${LAB_NUMBER}
-Cloning into 'tasks/lab05'...
-remote: Enumerating objects: 15, done.
-remote: Counting objects: 100% (15/15), done.
-remote: Compressing objects: 100% (14/14), done.
-remote: Total 81 (delta 4), reused 2 (delta 1), pack-reused 66
-Unpacking objects: 100% (81/81), done.
 $ mkdir reports/lab${LAB_NUMBER}
 $ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
 $ cd reports/lab${LAB_NUMBER}
@@ -194,19 +276,19 @@ $ gist REPORT.md
 
 ## Homework
 
-Вы продолжаете проходить стажировку в "Formatter Inc." (см [подробности](https://github.com/tp-labs/lab03#Homework)).
-
-В прошлый раз ваше задание заключалось в настройке автоматизированной системы **CMake**.
-
-Сейчас вам требуется настроить систему непрерывной интеграции для библиотек и приложений, с которыми вы работали в [прошлый раз](https://github.com/tp-labs/lab03#Homework). Настройте сборочные процедуры на различных платформах:
-* используйте [TravisCI](https://travis-ci.com/) для сборки на операционной системе **Linux** с использованием компиляторов **gcc** и **clang**;
-* используйте [AppVeyor](https://www.appveyor.com/) для сборки на операционной системе **Windows**.
+### Задание
+1. Создайте `CMakeList.txt` для библиотеки *banking*.
+2. Создайте модульные тесты на классы `Transaction` и `Account`.
+    * Используйте mock-объекты.
+    * Покрытие кода должно составлять 100%.
+3. Настройте сборочную процедуру на **TravisCI**.
+4. Настройте [Coveralls.io](https://coveralls.io/).
 
 ## Links
 
-- [Travis Client](https://github.com/travis-ci/travis.rb)
-- [AppVeyour](https://www.appveyor.com/)
-- [GitLab CI](https://about.gitlab.com/gitlab-ci/)
+- [C++ CI: Travis, CMake, GTest, Coveralls & Appveyor](http://david-grs.github.io/cpp-clang-travis-cmake-gtest-coveralls-appveyor/)
+- [Boost.Tests](http://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/)
+- [Catch](https://github.com/catchorg/Catch2)
 
 ```
 Copyright (c) 2015-2020 The ISC Authors
